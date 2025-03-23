@@ -1,0 +1,48 @@
+﻿<Window x:Class="RecipeApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:av="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="av"
+        Title="Recipe App" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="SANELE'S RECIPE APP" FontSize="20" HorizontalAlignment="Center" Margin="100,10,-110,10" Width="513"/>
+
+        <Button Content="Add Recipe" Grid.Row="1" Margin="10" Click="AddRecipe_Click"/>
+        <Button Content="Display Recipe" Grid.Row="2" Margin="10" Click="DisplayRecipes_Click"/>
+
+        <ComboBox x:Name="recipeComboBox" Grid.Row="3" Margin="10,26,5,217" />
+
+        <Button Content="Refresh" Click="Refresh_Click" Margin="5,209,5,36" Grid.Row="3"/>
+
+
+        <StackPanel Grid.Row="3" Margin="10" Visibility="Collapsed" x:Name="recipeDetailsPanel">
+            <TextBlock Text="Recipe Details" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+            <TextBlock Text="Name:" FontWeight="Bold"/>
+            <TextBox x:Name="recipeNameTextBox"/>
+            <TextBlock Text="Ingredients:" FontWeight="Bold"/>
+            <ItemsControl ItemsSource="{Binding SelectedRecipe.Ingredients}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Name}" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding Quantity}"/>
+                            <TextBlock Text="{Binding Unit}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <TextBlock Text="Steps:" FontWeight="Bold"/>
+            <ComboBox x:Name="stepsComboBox" Margin="10,0,0,0"/>
+
+            <TextBlock Text="Total Calories:" FontWeight="Bold" Margin="0,10,0,0"/>
+            <TextBlock Text="{Binding SelectedRecipe.TotalCalories}" FontWeight="Bold"/>
+        </StackPanel>
+        <Label x:Name="label" Content="entered recipe names" HorizontalAlignment="Center" Margin="0,35,0,0" Grid.Row="2" VerticalAlignment="Top" Grid.RowSpan="2"/>
+    </Grid>
+</Window>
